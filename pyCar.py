@@ -92,7 +92,7 @@ if __name__ == '__main__':
     for i in range (car_count):
         x = random.randrange(0, WINDOW_WIDTH - 55)
         y = random.randrange(-150, -50)
-        car = Car(x, y, 0, random.randint(5,10))
+        car = Car(x, y, 0, random.randint(1,5))
         car.load_image()
         cars.append(car)
 
@@ -131,7 +131,7 @@ if __name__ == '__main__':
                     score = 0
                     pygame.mouse.set_visible(False)
                     sound_engine.play()
-                    sleep(5)
+                    sleep(2)
                     pygame.mixer.music.play(-1)
             if not crash:
                 if event.type == pygame.KEYDOWN:
@@ -139,14 +139,23 @@ if __name__ == '__main__':
                         player.dx = 4
                     if event.key == pygame.K_LEFT:
                         player.dx = -4
+                    if event.key == pygame.K_UP:
+                        player.dy = -4
+                    if event.key == pygame.K_DOWN:
+                        player.dy = 4
 
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_RIGHT:
                         player.dx = 0
                     if event.key == pygame.K_LEFT:
-                        player.dx = 0
+                        player.dx = -0
+                    if event.key == pygame.K_UP:
+                        player.dy = 0
+                    if event.key == pygame.K_DOWN:
+                        player.dy = -0
 
         screen.fill(GRAY)
+        # pygame.display.flip()
 
         if not crash:
             for i in range(lane_count):
@@ -156,7 +165,8 @@ if __name__ == '__main__':
                     lanes[i][1] = -40 - lane_height
 
             player.draw_image()
-            player.move_x()  
+            player.move_x() 
+            player.move_y() 
             player.check_out_of_screen()
             
             for i in range(car_count):
@@ -177,6 +187,7 @@ if __name__ == '__main__':
                     sleep(2)
                     pygame.mouse.set_visible(True)
                     break
+            pygame.display.flip()
 
         else:
             draw_main_menu()
