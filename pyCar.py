@@ -92,7 +92,7 @@ if __name__ == '__main__':
     for i in range (car_count):
         x = random.randrange(0, WINDOW_WIDTH - 55)
         y = random.randrange(-150, -50)
-        car = Car(x, y, 0, random.randint(1,5))
+        car = Car(x, y, 0, random.randint(5,8))
         car.load_image()
         cars.append(car)
 
